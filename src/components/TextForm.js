@@ -27,7 +27,18 @@ export default function TextForm(props) {
     const handleCopy = () => {
         navigator.clipboard.writeText(text);
         props.showAlert("Text copied!","success");
-    }   
+    }  
+    
+    const words = (text) => {
+        let arr= text.split(/[ ]+/);
+        console.log(arr);
+       if (arr[(arr.length)-1]!=="") {
+           return arr.length;
+       } else {
+           return (arr.length-1)
+       }
+    }
+    
 
     const [text, setText] = useState('');
     return (
@@ -45,7 +56,7 @@ export default function TextForm(props) {
         </div>
         <div className="container" style={{color:props.mode==='light'?'black':'white'}}>
             <h2>Text Summary</h2>
-            <h6>{text.length>0?text.split(/[ ]+/).length:text.length} words and {text.length} characters</h6>
+            <h6>{words(text)} words and {text.length} characters</h6>
         </div>
         <div className="container my-3" style={{color:props.mode==='light'?'black':'white'}}>
             <h2>Preview</h2>
